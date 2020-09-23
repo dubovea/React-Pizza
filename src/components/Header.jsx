@@ -1,5 +1,6 @@
 import React from 'react';
-import logo from './resources/img/pizza-logo.svg';
+import Button from './Button';
+import logo from '../resources/img/pizza-logo.svg';
 
 function Header() {
     return (<div className="header">
@@ -12,8 +13,8 @@ function Header() {
                 </div>
             </div>
             <div className="header__cart">
-                <a href="/cart.html" className="button button--cart">
-                    <span>520 ₽</span>
+                <Button className="button--cart">
+                <span>520 ₽</span>
                     <div className="button__delimiter"></div>
                     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -27,7 +28,7 @@ function Header() {
                             stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                     <span>3</span>
-                </a>
+                </Button>
             </div>
         </div>
     </div>);
