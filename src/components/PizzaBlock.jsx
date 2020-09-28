@@ -1,5 +1,6 @@
 import React from "react";
 import classNames from "classnames";
+import PropTypes from "prop-types";
 
 function PizzaBlock({ name, imageUrl, price, types, sizes }) {
   const avaiableTypes = ["тонкое", "традиционное"];
@@ -30,12 +31,12 @@ function PizzaBlock({ name, imageUrl, price, types, sizes }) {
                 disabled: !types.includes(i),
               })}
             >
-              {type} 
+              {type}
             </li>
           ))}
         </ul>
         <ul>
-        {avaiableSizes.map((size, i) => (
+          {avaiableSizes.map((size, i) => (
             <li
               key={size}
               onClick={() => onSelectSize(i)}
@@ -45,7 +46,7 @@ function PizzaBlock({ name, imageUrl, price, types, sizes }) {
               })}
             >
               {size} см.
-            </li> 
+            </li>
           ))}
         </ul>
       </div>
@@ -71,5 +72,23 @@ function PizzaBlock({ name, imageUrl, price, types, sizes }) {
     </div>
   );
 }
+
+PizzaBlock.propTypes = {
+  name: PropTypes.string,
+  price: PropTypes.number,
+  imageUrl: PropTypes.string,
+  types: PropTypes.arrayOf(PropTypes.number),
+  sizes: PropTypes.arrayOf(PropTypes.number),
+};
+
+PizzaBlock.defaultProps = {
+  name: "Pizza",
+  price: null,
+  imageUrl:
+    "https://dodopizza.azureedge.net/static/Img/Products/f035c7f46c0844069722f2bb3ee9f113_584x584.jpeg",
+  types: [],
+  sizes: [],
+};
+
 
 export default PizzaBlock;
