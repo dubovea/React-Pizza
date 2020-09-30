@@ -1,10 +1,11 @@
 import React from "react";
 
-function Categories({ items, onClick }) {
+const Categories = React.memo(function Categories({ items, onClickItem }) {
   const [activeItem, setActiveItem] = React.useState(null);
 
   const onSelectItem = (i) => {
     setActiveItem(i);
+    onClickItem(i);
   };
 
   return (
@@ -29,7 +30,7 @@ function Categories({ items, onClick }) {
       </ul>
     </div>
   );
-}
+});
 
 // class Categories extends React.Component {
 //   state = {

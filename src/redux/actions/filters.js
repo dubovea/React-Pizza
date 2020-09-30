@@ -1,15 +1,15 @@
 //Action Creaters
-const setSoryBy = (name) => ({
+export const setSoryBy = (name) => ({
     type: "SET_SORT_BY",
     payload: name
 })
 
-const setCategory = (index) => ({
+export const setCategory = (index) => ({
     type: "SET_CATEGORY",
     payload: index
 })
 
 //Action
-const setSoryBy2 = ({
+export const setSoryBy2 = ({
     type: "SET_SORT_BY"
 })
