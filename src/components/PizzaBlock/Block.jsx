@@ -90,5 +90,4 @@ PizzaBlock.defaultProps = {
   sizes: [],
 };
 
-
 export default PizzaBlock;
