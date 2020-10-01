@@ -19,7 +19,8 @@ const SortPopup = React.memo(function SortPopup({
   };
 
   const handleOutsidePopupCLick = (e) => {
-    if (!e.path.includes(sortRef.current)) {
+    const path = e.path || (e.composedPath && e.composedPath()) || composedPath(e.target);
+    if (!path.includes(sortRef.current)) {
       setVisiblePopup(false);
     }
   };
@@ -74,6 +75,6 @@ SortPopup.propTypes = {
 };
 
 SortPopup.defaultProps = {
-  items: []
-}
+  items: [],
+};
 export default SortPopup;
