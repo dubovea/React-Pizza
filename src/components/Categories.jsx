@@ -1,27 +1,24 @@
 import React from "react";
-
-const Categories = React.memo(function Categories({ items, onClickItem }) {
-  const [activeItem, setActiveItem] = React.useState(null);
-
-  const onSelectItem = (i) => {
-    setActiveItem(i);
-    onClickItem(i);
-  };
-
+import PropTypes from "prop-types";
+const Categories = React.memo(function Categories({
+  activeCategory,
+  items,
+  onClickCategory,
+}) {
   return (
     <div className="categories">
       <ul>
         <li
-          onClick={() => setActiveItem(null)}
-          className={activeItem === null ? "active" : ""}
+          className={activeCategory === null ? "active" : ""}
+          onClick={() => onClickCategory(null)}
         >
           Все
         </li>
         {items &&
           items.map((name, i) => (
             <li
-              className={activeItem === i ? "active" : ""}
-              onClick={() => onSelectItem(i)}
+              className={activeCategory === i ? "active" : ""}
+              onClick={() => onClickCategory(i)}
               key={`${name}_${i}`}
             >
               {name}
@@ -32,12 +29,23 @@ const Categories = React.memo(function Categories({ items, onClickItem }) {
   );
 });
 
+Categories.propTypes = {
+  activeCategory: PropTypes.number,
+  items: PropTypes.arrayOf(PropTypes.string).isRequired,
+  onClickCategory: PropTypes.func,
+};
+
+Categories.defaultProps = {
+  activeCategory: null,
+  items: [],
+};
+
 // class Categories extends React.Component {
 //   state = {
 //     activeItem: 3,
 //   };
 
-//   onSelectItem = (index) => {
+//   onSelectCategory = (index) => {
 //     this.setState({
 //       activeItem: index,
 //     });
@@ -52,7 +60,7 @@ const Categories = React.memo(function Categories({ items, onClickItem }) {
 //           {items.map((name, i) => (
 //             <li
 //               className={this.state.activeItem === i ? "active" : ""}
-//               onClick={() => this.onSelectItem(i)}
+//               onClick={() => this.onSelectCategory(i)}
 //               key={`${name}_${i}`}
 //             >
 //               {name}
