@@ -1,7 +1,3 @@
-import {
-    act
-} from "react-dom/test-utils";
-
 const initialState = {
     items: {},
     totalPrice: 0,
@@ -14,11 +10,12 @@ const cart = (state = initialState, action) => {
             return {
                 ...state,
                 items: {
-                    [action.payload.id]: [
                         ...state.items,
-                        action.payload
-                    ]
-                }
+                        [action.payload.id]:
+                            !state.items[action.payload.id] ? [action.payload] : [...state.items[action.payload.id], action.payload]
+                    },
+                    totalCount: state.totalCount + 1,
+                    totalPrice: state.totalPrice + action.payload.price
             }
             default:
                 return state;
