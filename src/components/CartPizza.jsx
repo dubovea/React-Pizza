@@ -1,5 +1,17 @@
 import React from "react";
-function CartPizza({ name, type, size, totalCount, totalPrice }) {
+import Button from "./Button";
+
+function CartPizza({ id, name, type, size, totalCount, totalPrice, onRemove, onIcrement, onDecrement}) {
+  const handleRemoveClick = () => {
+    onRemove(id);
+  };
+  const handleDecrementClick = () => {
+    onDecrement(id);
+  };
+  const handleIncrementClick = () => {
+    onIcrement(id);
+  };
+
   return (
     <div className="cart__item">
       <div className="cart__item-img">
@@ -16,7 +28,7 @@ function CartPizza({ name, type, size, totalCount, totalPrice }) {
         </p>
       </div>
       <div className="cart__item-count">
-        <div className="button button--outline button--circle cart__item-count-minus">
+        <div onClick={handleDecrementClick} className="button button--outline button--circle cart__item-count-minus">
           <svg
             width="10"
             height="10"
@@ -35,7 +47,7 @@ function CartPizza({ name, type, size, totalCount, totalPrice }) {
           </svg>
         </div>
         <b>{totalCount}</b>
-        <div className="button button--outline button--circle cart__item-count-plus">
+        <div onClick={handleIncrementClick} className="button button--outline button--circle cart__item-count-plus">
           <svg
             width="10"
             height="10"
@@ -58,7 +70,7 @@ function CartPizza({ name, type, size, totalCount, totalPrice }) {
         <b>{totalPrice} ₽</b>
       </div>
       <div className="cart__item-remove">
-        <div className="button button--outline button--circle">
+        <Button onClick={handleRemoveClick} className="button--circle" outline>
           <svg
             width="10"
             height="10"
@@ -75,7 +87,7 @@ function CartPizza({ name, type, size, totalCount, totalPrice }) {
               fill="#EB5A1E"
             />
           </svg>
-        </div>
+        </Button>
       </div>
     </div>
   );

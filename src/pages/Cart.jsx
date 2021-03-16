@@ -3,19 +3,35 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
 import CartPizza from "../components/CartPizza";
-import { clearCart } from "../redux/actions/cart";
+import { clearCart, removeCartItem, inceremtItem, decrementItem } from "../redux/actions/cart";
 import emptyCartPng from "../resources/img/empty-cart.png";
 
 function Cart() {
   const dispatch = useDispatch();
   const { items, totalCount, totalPrice } = useSelector(({ cart }) => cart);
+
   const addedPizzas = Object.keys(items).map((key) => {
     return items[key].items[0];
   });
+
   const onClearCart = () => {
     if (window.confirm("Вы действительно хотите удалить заказ?")) {
       dispatch(clearCart());
     }
+  };
+
+  const onRemoveItem = (id) => {
+    if (window.confirm("Вы действительно хотите удалить пиццу?")) {
+      dispatch(removeCartItem(id));
+    }
+  };
+
+  const onDecrementItem = (id) => {
+      dispatch(decrementItem(id));
+  };
+
+  const onIcrementItem = (id) => {
+      dispatch(inceremtItem(id));
   };
 
   return (
@@ -100,12 +116,15 @@ function Cart() {
               {addedPizzas &&
                 addedPizzas.map((pizza) => (
                   <CartPizza
-                    key={pizza.id}
+                    id={pizza.id}
                     name={pizza.name}
                     type={pizza.type}
                     size={pizza.size}
                     totalPrice={items[pizza.id].totalPrice}
                     totalCount={items[pizza.id].items.length}
+                    onRemove={onRemoveItem}
+                    onIcrement = {onIcrementItem}
+                    onDecrement = {onDecrementItem}
                   />
                 ))}
             </div>
